@@ -4,17 +4,17 @@ node default {
   class { '::opencontrail_ci::server': }
 }
 
-node /ci-puppetmaster2?.opencontrail.org/ {
+node /tf-infra-puppetmaster2?.mosi.mirantis.net/ {
   class { '::opencontrail_ci::server': }
   class { '::opencontrail_ci::puppetmaster': }
 }
 
-node /puppetdb2?.opencontrail.org/ {
+node /tf-infra-puppetdb2?.mosi.mirantis.net/ {
   class { '::opencontrail_ci::server': }
   class { '::opencontrail_ci::puppetdb': }
 }
 
-node /logs2?.opencontrail.org/ {
+node /tf-infra-logs2?.mosi.mirantis.net/ {
   class { '::opencontrail_ci::server': }
   class { '::opencontrail_ci::logserver':
     logserver_ssl_key  => hiera('logserver_ssl_key'),
@@ -23,47 +23,47 @@ node /logs2?.opencontrail.org/ {
   }
 }
 
-node /zuulv3(-dev)?.opencontrail.org/ {
+node /tf-infra-zuulv3(-dev)?.mosi.mirantis.net/ {
   class { '::opencontrail_ci::server': }
   class { '::opencontrail_ci::zuul_scheduler': }
   class { '::opencontrail_ci::zuul_merger': }
   class { '::opencontrail_ci::zookeeper': }
 }
 
-node /nl\d+(-dev|-jnpr)?.opencontrail.org/ {
+node /tf-infra-nl\d+(-dev|-jnpr)?.mosi.mirantis.net/ {
   class { '::opencontrail_ci::server': }
   class { '::opencontrail_ci::nodepool_launcher': }
 }
 
-node /nb\d+(-dev|-jnpr)?.opencontrail.org/ {
+node /tf-infra-nb\d+(-dev|-jnpr)?.mosi.mirantis.net/ {
   class { '::opencontrail_ci::server': }
   class { '::opencontrail_ci::nodepool_builder': }
 }
 
-node /ze\d+(-dev|-jnpr)?.opencontrail.org/ {
+node /tf-infra-ze\d+(-dev|-jnpr)?.mosi.mirantis.net/ {
   class { '::opencontrail_ci::server': }
   class { '::opencontrail_ci::zuul_executor': }
   class { '::opencontrail_ci::zuul_executor_autossh': }
 }
 
-node /ci-repo.englab.juniper.net/ {
+node /tf-infra-ci-repo.mosi.mirantis.net/ {
   class { '::opencontrail_ci::server': }
   class { '::opencontrail_ci::pulp_server': }
   class { '::opencontrail_ci::pulp_ci_repo': }
 }
 
-node /repo.opencontrail.org/ {
+node /tf-infra-repo.mosi.mirantis.net/ {
   class { '::opencontrail_ci::server': }
   class { '::opencontrail_ci::pulp_server': }
   class { '::opencontrail_ci::pulp_public_repo': }
 }
 
-node /stats.opencontrail.org/ {
+node /tf-infra-stats.mosi.mirantis.net/ {
   class { '::opencontrail_ci::server': }
   class { '::opencontrail_ci::stats': }
 }
 
-node /mirrors.englab.juniper.net/ {
+node /tf-infra-mirrors.mosi.mirantis.net/ {
   class {'::opencontrail_ci::server': }
   class {'::opencontrail_ci::mirror':
     vhost_name => $::fqdn,
@@ -71,7 +71,7 @@ node /mirrors.englab.juniper.net/ {
   class {'::opencontrail_ci::mirror_update': }
 }
 
-node /ci-nexus.englab.juniper.net/ {
+node /tf-infra-nexus.mosi.mirantis.net/ {
   class {'::opencontrail_ci::server': }
   class {'::opencontrail_ci::nexus_repository':
     registry_ports => [5001, 5002, 5003, 5005, 5006, 5007, 5010],

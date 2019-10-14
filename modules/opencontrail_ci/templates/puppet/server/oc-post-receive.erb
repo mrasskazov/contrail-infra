@@ -41,7 +41,7 @@ $stdin.each_line do |line|
   end
 
   puppet_ssl_dir = "/var/lib/puppet/ssl"
-  puppetmaster_pem_name = "puppetmaster.opencontrail.org.pem"
+  puppetmaster_pem_name = "tf-infra-puppetmaster.mosi.mirantis.net.pem"
   puppet_server_cache_endpoint = "https://localhost:8140/puppet-admin-api/v1/environment-cache"
   do_cmd("r10k deploy environment --puppetfile --verbose info #{branchname}")
 end

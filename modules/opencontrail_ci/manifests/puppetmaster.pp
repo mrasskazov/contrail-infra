@@ -44,7 +44,7 @@ class opencontrail_ci::puppetmaster(
     require => User['puppet'],
   }
 
-  ssh_authorized_key { 'gerrit@review2.opencontrail.org':
+  ssh_authorized_key { 'gerrit@tf-infra-review2.mosi.mirantis.net':
     ensure  => present,
     user    => 'puppet',
     type    => 'ssh-rsa',

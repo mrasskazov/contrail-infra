@@ -2,7 +2,7 @@
 #
 # environment-specific variables for the bootstrap process.
 declare -A HOSTS
-HOSTS[puppetdb]=puppetdb2.opencontrail.org
-HOSTS[puppetmaster]=ci-puppetmaster2.opencontrail.org
+HOSTS[puppetdb]=tf-infra-puppetdb.mosi.mirantis.net
+HOSTS[puppetmaster]=tf-infra-puppetmaster.mosi.mirantis.net
 ENVIRONMENT=development
 CURRENT_BRANCH=development

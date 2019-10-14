@@ -1,4 +1,4 @@
-- hosts: 'puppetdb.opencontrail.org:!disabled'
+- hosts: 'tf-infra-puppetdb.mosi.mirantis.net:!disabled'
   tasks:
   - name: shut down puppet agent and puppetdb
     service:
@@ -17,7 +17,7 @@
       - /var/lib/puppet/ssl/
       - /etc/puppetdb/ssl/
   - name: clean-up puppetdb certificate on master
-    command: puppet cert clean puppetdb.opencontrail.org
+    command: puppet cert clean tf-infra-puppetdb.mosi.mirantis.net
     delegate_to: localhost
     become: true
     become_user: root

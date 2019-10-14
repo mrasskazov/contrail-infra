@@ -1,7 +1,7 @@
 opencontrail_ci::hosts:
-  puppetmaster: ci-puppetmaster.opencontrail.org
-  puppetdb: puppetdb.opencontrail.org
-opencontrail_ci::graphite_host: 148.251.5.91
+  puppetmaster: tf-infra-puppetmaster.mosi.mirantis.net
+  puppetdb: tf-infra-puppetdb.mosi.mirantis.net
+#opencontrail_ci::graphite_host: 148.251.5.91
 opencontrail_ci::graphite_port: 7999
 #opencontrail_ci::project_config_repo: https://github.com/mrasskazov/contrail-project-config
 opencontrail_ci::project_config_repo: https://gerrit.mcp.mirantis.com/tungsten-ci/contrail-project-config
@@ -33,7 +33,7 @@ zuul::known_hosts::known_hosts_content: |
   #  [gerrit.tungsten.io]:29418 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzMRmvP/Zaup/E24Xq04DgfFpGuMEH2RLwHdw86WTRVMjourdCGpXvHHEgTrnH5zNkwr27Bw6C912A6HypOKTTgszJBSNseSnnPXZ5a951h0g2CuGtY3TPfLgW+j8V3C/ZnQugB2EQgt6O4P56HMnLvvnxM8bzZD59neQdgFOXYNOcEVX+rjh2Fc+q0m3gr1hOU/AvB9rlReoibXuqU/1P71oMTn8J0uo3ZHq049Ts67kmsOMa4P7CPmITXqlNdHsS/TXHKPWRTYLKlz1dm5GOO18nvFqpuH+1kAUduWkI8qU1wS0ya0LRlokQSAVTd+xlLKxa9mRJOWhx87mJmFpr
 
 # Configure all zuul services to authorize with Gearman server using SSL.
-zuul::gearman_server:          "zuulv3.opencontrail.org"
+zuul::gearman_server:          "tf-infra-zuulv3.mosi.mirantis.net"
 zuul::gearman_port:            '7999'
 zuul::gearman_listen_port:     '7999'
 zuul::gearman_ssl_use_puppet:  true
@@ -50,12 +50,12 @@ zuul::zuulv3:          true
 zuul::python_version:  3
 
 # Zuul Gerrit integration
-zuul::gerrit_server: "review.opencontrail.org"
-zuul::gerrit_user:   "zuulv3"
+zuul::gerrit_server: "review.mcp.mirantis.com"
+zuul::gerrit_user:   "zuul-tf"
 
 # Zuul Git configuration
-zuul::git_email: "zuul@opencontrail.org"
-zuul::git_name:  "OpenContrail Zuul"
+zuul::git_email: "opencontrail+zuul-tf@mirantis.com"
+zuul::git_name:  "Zuul Tungsten Fabric"
 
 # Generic configuration -- part of the zuul.conf template
 zuul::disk_limit_per_job:      4096
@@ -66,31 +66,27 @@ zuul::untrusted_ro_paths: ["/etc/ssl/certs"]
 zuul::connections:
   - name:   'gerrit'
     driver: 'gerrit'
-    server: 'review.opencontrail.org'
-    user:   'zuulv3'
-    sshkey: '/var/lib/zuul/ssh/id_rsa'
-
-  - name:   'tfgerrit'
-    driver: 'gerrit'
-    server: 'gerrit.tungsten.io'
-    user:   'tungsten_zuul'
-    sshkey: '/var/lib/zuul/ssh/id_rsa'
+    #server: 'review.mcp.mirantis.com'
+    server: 'gerrit.mcp.mirantis.net'
+    user:   'zuul-tf'
+    sshkey: '/var/lib/zuul/.ssh/id_rsa'
+    baseurl: 'http://gerrit-us2.mcp.mirantis.net:8080'
 
   - name:   'github'
     driver: 'github'
-    sshkey: '/var/lib/zuul/ssh/id_rsa'
+    baseurl: 'https://github.com'
 
-  - name:   'stats'
-    driver: 'sql'
+#  - name:   'stats'
+#    driver: 'sql'
 
-  - name:   'smtp'
-    driver: 'smtp'
-    server: 'review.opencontrail.org'
-    port:   '25'
-    default_from: 'zuulv3@opencontrail.org'
-    default_to:   'ci-admin@opencontrail.org'
+#  - name:   'smtp'
+#    driver: 'smtp'
+#    server: 'review.mosi.mirantis.net'
+#    port:   '25'
+#    default_from: 'opencontrail+zuul-tf@mirantis.com'
+#    default_to:   'opencontrail+zuul-tf@mirantis.com'
 
-zuul::zookeeper_hosts: "zuulv3.opencontrail.org:3389"
+zuul::zookeeper_hosts: "tf-infra-zuulv3.mosi.mirantis.net:3389"
 
 # Configure connection to local statsd collector (collectd plugin)
 zuul::statsd_host: "127.0.0.1"

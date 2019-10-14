@@ -66,7 +66,7 @@ def get_running_containers():
 
 def get_active_buildsets():
     """Get the list of running builds(ets) from Zuul's status.json"""
-    req = requests.get('http://zuulv3.opencontrail.org/status.json')
+    req = requests.get('http://tf-infra-zuulv3.mosi.mirantis.net/status.json')
     build_data = req.json()
     running_buildsets = []
     for pipeline in build_data['pipelines']:
