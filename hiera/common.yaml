@@ -3,7 +3,8 @@ opencontrail_ci::hosts:
   puppetdb: puppetdb.opencontrail.org
 opencontrail_ci::graphite_host: 148.251.5.91
 opencontrail_ci::graphite_port: 7999
-opencontrail_ci::project_config_repo: https://github.com/Juniper/contrail-project-config
+#opencontrail_ci::project_config_repo: https://github.com/mrasskazov/contrail-project-config
+opencontrail_ci::project_config_repo: https://gerrit.mcp.mirantis.com/tungsten-ci/contrail-project-config
 opencontrail_ci::zookeeper::allowed_clients:
   - 66.129.239.0/24  # Juniper Networks
 opencontrail_ci::zuul_scheduler::gearman_allowed_clients:
