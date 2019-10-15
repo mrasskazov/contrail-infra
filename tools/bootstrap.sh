@@ -57,6 +57,7 @@ sudo -u puppet r10k puppetfile install --verbose info \
 # initial puppet run to deploy puppet master, without puppetdb
 # integration. Both server and puppetmaster classes are applied,
 # to fullfill module dependencies.
+PATH=/opt/puppetlabs/bin:${PATH}
 puppet apply --hiera_config ${SCRIPT_DIR}/hiera.yaml \
   --modulepath ${PROJECT_DIR}/modules/:${PROJECT_DIR}/vendor \
   -e "class { '::opencontrail_ci::server': } -> class { 'opencontrail_ci::puppetmaster': puppetdb_enabled => false }"
