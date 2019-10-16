@@ -87,9 +87,25 @@ class opencontrail_ci::puppetmaster(
     eyaml_datadir => '/var/lib/puppet/hieradata/%{::environment}',
   }
 
+  package { 'build-essential':
+    ensure   => 'installed',
+  }
+
+  package { 'libssl-dev':
+    ensure   => 'installed',
+  }
+
+  package { 'libffi-dev':
+    ensure   => 'installed',
+  }
+
+  package { 'python-dev':
+    ensure   => 'installed',
+  }
+
   class { '::ansible':
     ansible_version => '2.2.2.0',
-    require         => Package['curl'],
+    require         => [ Package['curl'], Package['build-essential'], Package['libssl-dev'], Package['libffi-dev'], Package['python-dev'] ]
   }
 
   firewall { '100 accept tcp 8140 from everywhere':
