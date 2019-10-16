@@ -196,21 +196,23 @@ EOF
     # the version of puppet ship by xenial.
     if [ $lsbdistcodename != 'xenial' ]; then
         puppet_deb=puppetlabs-release-${lsbdistcodename}.deb
-        if type curl >/dev/null 2>&1; then
-            curl -O http://apt.puppetlabs.com/$puppet_deb
-        else
-            wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
-        fi
-        dpkg -i $puppet_deb
-        rm $puppet_deb
+    else
+        puppet_deb=puppetlabs-release-pc1-${lsbdistcodename}.deb
+    fi
+    if type curl >/dev/null 2>&1; then
+        curl -O http://apt.puppetlabs.com/$puppet_deb
+    else
+        wget http://apt.puppetlabs.com/$puppet_deb -O $puppet_deb
+    fi
+    dpkg -i $puppet_deb
+    rm $puppet_deb
 
 	DEBIAN_FRONTEND=noninteractive apt-get update
 
-        # ansible also requires python2 on the host to run correctly.
-        # Make sure we have it, as some images come without it
-        DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
-            --assume-yes install python-minimal
-    fi;
+    # ansible also requires python2 on the host to run correctly.
+    # Make sure we have it, as some images come without it
+    DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
+        --assume-yes install python-minimal
 
     DEBIAN_FRONTEND=noninteractive apt-get --option 'Dpkg::Options::=--force-confold' \
         --assume-yes dist-upgrade
